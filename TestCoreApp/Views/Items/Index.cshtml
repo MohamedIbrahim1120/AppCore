@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Item>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="container p-3">
+
+    <partial name="_notification" />
+
+
+
+     <div class="row pt-4">
+         <div class="col-6">
+             <h2 class="text-primary">Items View</h2>
+         </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Items" asp-action="New" class="btn btn-primary">
+                <i class="bi bi-person-plus"></i> &nbsp;  Add New Item
+            </a>
+        </div>
+
+     </div>
+    <table class="table table-hover" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">
+                    Item Name
+                </th>
+                <th scope="col">
+                    Item Price
+                </th>
+                <th scope="col">
+                    Category
+                </th>
+                <th scope="col">
+                    Images
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) 
+            {
+                <tr class="table-active">
+                    <td scope="row" width="30%">
+                        @item.Name
+                    </td>
+                    <td width="25%">
+                        @item.Price
+                    </td> 
+                    <td width="30%">
+                        @item.Category.Name
+                    </td>
+                    <td>
+                        <img src="~/images/ @item.imagePath" style="width:48px" class="img-thumbnail" />
+                       
+                    </td>
+                    <td>
+                        <a asp-controller="Items" asp-action="Edit" asp-route-Id="@item.Id" class="btn btn-success ">
+                            <i class="bi bi-pencil-square"></i> &nbsp;  Edit
+                        </a>
+                    </td>
+                         
+                        <td>
+                        <a asp-controller="Items" asp-action="Delete"asp-route-Id="@item.Id" class="btn  btn-danger ">
+                            <i class="bi bi-person-dash"></i> &nbsp;  Delete    
+                        </a>
+                    </td>
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
